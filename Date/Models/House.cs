@@ -34,7 +34,7 @@ namespace house_rentals.Date.Models
         public int OwnerId { get; set; }
         public Owner Owner { get; set; } = null!;
 
-        public ICollection<House_amenitie> HouseAmenities { get; set; } = new List<House_amenitie>();
+        public ICollection<House_Amenity> House_Amenities { get; set; } = new List<House_Amenity>();
         public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
     }
 }

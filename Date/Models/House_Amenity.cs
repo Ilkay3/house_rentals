@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace house_rentals.Date.Models
 {
-    public class House_amenitie
+    public class House_Amenity
     {
         //[ForeignKey(nameof(House))]
         public int HouseId { get; set; }

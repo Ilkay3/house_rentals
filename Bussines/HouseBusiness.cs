@@ -1,5 +1,5 @@
-﻿using house_rentals.Date;
-using house_rentals.Date.Models;
+﻿using house_rentals.Date.Models;
+using house_rentals.Date;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,61 +8,61 @@ using System.Threading.Tasks;
 
 namespace house_rentals.Bussines
 {
-    public class AmenityBusiness : ICRUD<Amenity>
+    public class HouseBusiness : ICRUD<House>
     {
         private HouseRentalsDBContext houseRentalsDBContext = new HouseRentalsDBContext();
 
-        public AmenityBusiness()
+        public HouseBusiness(HouseRentalsDBContext houseRentalsDBContext)
         {
-            this.houseRentalsDBContext = new HouseRentalsDBContext();
+            this.houseRentalsDBContext = houseRentalsDBContext;
         }
 
-        public void Add(Amenity item)
+        public void Add(House item)
         {
             using (houseRentalsDBContext = new HouseRentalsDBContext())
             {
-                houseRentalsDBContext.Amenities.Add(item);
+                houseRentalsDBContext.Houses.Add(item);
                 houseRentalsDBContext.SaveChanges();
             }
         }
 
-        public void Delete(Amenity item)
+        public void Delete(House item)
         {
             using (houseRentalsDBContext = new HouseRentalsDBContext())
             {
-                var amenity = houseRentalsDBContext.Amenities.Find(item.AmenityId);
-                if (amenity != null)
+                var house = houseRentalsDBContext.Houses.Find(item.HouseId);
+                if (house != null)
                 {
-                    houseRentalsDBContext.Amenities.Remove(amenity);
+                    houseRentalsDBContext.Houses.Remove(house);
                     houseRentalsDBContext.SaveChanges();
                 }
             }
         }
 
-        public Amenity Get(Amenity item)
+        public House Get(House item)
         {
             using (houseRentalsDBContext = new HouseRentalsDBContext())
             {
-                return houseRentalsDBContext.Amenities.Where(x => x.AmenityId == item.AmenityId).FirstOrDefault();
+                return houseRentalsDBContext.Houses.Where(x => x.HouseId == item.HouseId).FirstOrDefault();
             }
         }
 
-        public List<Amenity> GetAll()
+        public List<House> GetAll()
         {
             using (houseRentalsDBContext = new HouseRentalsDBContext())
             {
-                return houseRentalsDBContext.Amenities.ToList();
+                return houseRentalsDBContext.Houses.ToList();
             }
         }
 
-        public void Update(Amenity item)
+        public void Update(House item)
         {
             using (houseRentalsDBContext = new HouseRentalsDBContext())
             {
-                var amenity = houseRentalsDBContext.Amenities.Find(item.AmenityId);
-                if (amenity != null)
+                var house = houseRentalsDBContext.Houses.Find(item.HouseId);
+                if (house != null)
                 {
-                    houseRentalsDBContext.Entry(amenity).CurrentValues.SetValues(item);
+                    houseRentalsDBContext.Entry(house).CurrentValues.SetValues(item);
                     houseRentalsDBContext.SaveChanges();
                 }
             }

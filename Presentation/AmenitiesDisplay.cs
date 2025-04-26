@@ -1,4 +1,5 @@
-﻿using house_rentals.Date.Models;
+﻿using house_rentals.Controllers;
+using house_rentals.Date.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,208 +9,150 @@ using System.Threading.Tasks;
 
 namespace house_rentals.Presentation
 {
-    internal class AmenitiesDisplay : IDisplay
+ /*   public class AmenityDisplay : IDisplay
     {
-            private int closeOperationId = 6;
-            private IController<Amenity> amenityController = new AmenityController();
-            public AmenityDisplay()
-            {
-                Input();
-            }
-            public AmenityDisplay(IController<Amenity> amenityController)
-            {
-                Input();
-                this.schoolController = schoolController;
-            }
+        private int closeOperationId = 6;
+        private AmenityController controller = new AmenityController();
 
-            public void ShowMenu()
-            {
-                Console.WriteLine(new string('-', 40));
-                Console.WriteLine(new string(' ', 8) + "MENU SCHOOLS" + new string(' ', 8));
-                Console.WriteLine(new string('-', 40));
-                Console.WriteLine("1. List all amenities");
-                Console.WriteLine("2. Add new amenity");
-                Console.WriteLine("3. Update amenity");
-                Console.WriteLine("4. Fetch amenity by Id");
-                Console.WriteLine("5. Delete amenity by Id");
-                Console.WriteLine("6. Menu");
-            }
+        public AmenityDisplay(IController<Amenity> amenityController)
+        {
+            Input();
+            this.AmenityController = amenityController;
+        }
 
-            public void Input()
+        public void ShowMenu()
+        {
+            Console.WriteLine(new string('-', 40));
+            Console.WriteLine(new string(' ', 8) + "MENU AMENITIES" + new string(' ', 8));
+            Console.WriteLine(new string('-', 40));
+            Console.WriteLine("1. Add Amenity");
+            Console.WriteLine("2. Delete Amenity");
+            Console.WriteLine("3. Update Amenity");
+            Console.WriteLine("4. Extract Amenity");
+            Console.WriteLine("5. List All Amenities");
+            Console.WriteLine("6. Exit");
+        }
+
+        public void Input()
+        {
+            Console.Write("Enter your choice: ");
+            int operation = operation = int.Parse(Console.ReadLine());
+            do
             {
-                var operation = -1;
-                do
+                ShowMenu();
+                switch (operation)
                 {
-                    ShowMenu();
-                    operation = int.Parse(Console.ReadLine());
-                    switch (operation)
-                    {
-                        case 1:
-                            ListAll();
-                            break;
-                        case 2:
-                            Add();
-                            break;
-                        case 3:
-                            Update();
-                            break;
-                        case 4:
-                            Fetch();
-                            break;
-                        case 5:
-                            Delete();
-                            break;
-                        default:
-                            Console.WriteLine("Invalid operation");
-                            break;
-                    }
-                } while (operation != closeOperationId);
-            }
-
-            public void Add()
-            {
-                try
-                {
-                    School school = new School();
-                    do
-                    {
-                        Console.WriteLine("Enter ID: ");
-                        school.Id = int.Parse(Console.ReadLine());
-                    }
-                    while (Validators.IsIntNoValid(school.Id));
-
-                    do
-                    {
-                        Console.WriteLine("Enter name: ");
-                        school.Name = Console.ReadLine();
-                    }
-                    while (Validators.IsStringNoValid(school.Name));
-                    //TODO manager
-
-                    schoolController.Add(school);
-                    Console.WriteLine("School add to database.");
+                    case 1:
+                        Add();
+                        break;
+                    case 2:
+                        Delete();
+                        break;
+                    case 3:
+                        Update();
+                        break;
+                    case 4:
+                        Extract();
+                        break;
+                    case 5:
+                        ListAll();
+                        break;
+                    case 0:
+                        Console.WriteLine("Exiting Amenity Menu...");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        break;
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
+            } while (operation != 0);
+        }
 
-            public void Delete()
+        public void Add()
+        {
+            try
             {
-                try
+                Amenity amenity = new Amenity();
+                do 
                 {
-                    School findSchool = new School();
-                    do
-                    {
-                        Console.WriteLine("Enter school ID: ");
-                        findSchool.Id = int.Parse(Console.ReadLine());
-                    }
-                    while (Validators.IsIntNoValid(findSchool.Id));
-
-                    schoolController.Delete(findSchool);
-                    Console.WriteLine("Done.");
+                    Console.WriteLine("Enter amanity Id: ");
+                    new Amenity.Id = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Amenity added successfully!");
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                while (Validators.IsIntNoValid(newAmenity.Id));
             }
-
-            public void Fetch()
+            catch (Exception ex)
             {
-                try
-                {
-                    School findSchool = new School();
-                    do
-                    {
-                        Console.WriteLine("Enter school ID: ");
-                        findSchool.Id = int.Parse(Console.ReadLine());
-                    }
-                    while (Validators.IsIntNoValid(findSchool.Id));
+                Console.WriteLine(ex.Message);
+            }
+        }
 
-                    School school = schoolController.Get(findSchool);
+        public void Delete()
+        {
+            Console.Write("Enter Amenity ID to delete: ");
+            int id = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine(new string('-', 40));
-                    Console.WriteLine("ID: " + school.Id);
-                    Console.WriteLine("Name: " + school.Name);
-                    //  Console.WriteLine("Students:");
-                    foreach (Student student in school.Students)
-                    {
-                        Console.WriteLine("Student: " + student.Id);
-                        Console.WriteLine("First name: " + student.FirstName);
-                        Console.WriteLine("Last name: " + student.LastName);
-                        Console.WriteLine("Age: " + student.Age);
-                    }
-                    if (school.Manager != null) Console.WriteLine("Manager: " + school.Manager.FirstName + " " + school.Manager.LastName);
-                    Console.WriteLine(new string('-', 40));
-                }
-                catch (Exception ex)
+            try
+            {
+                controller.Delete(new Amenity { AmenityId = id });
+                Console.WriteLine("Amenity deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void Update()
+        {
+            Console.Write("Enter Amenity ID to update: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter new Amenity Name: ");
+            string name = Console.ReadLine() ?? string.Empty;
+
+            Amenity amenity = new Amenity { AmenityId = id, Name = name };
+            try
+            {
+                controller.Update(amenity);
+                Console.WriteLine("Amenity updated successfully!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void Extract()
+        {
+            Console.Write("Enter Amenity ID to extract: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            try
+            {
+                var amenity = controller.Get(new Amenity { AmenityId = id });
+                Console.WriteLine($"Amenity: ID = {amenity.AmenityId}, Name = {amenity.Name}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void ListAll()
+        {
+            try
+            {
+                var amenities = controller.ListAll();
+                Console.WriteLine("\nList of Amenities:");
+                foreach (var a in amenities)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine($"ID: {a.AmenityId}, Name: {a.Name}");
                 }
             }
-
-            public void Update()
+            catch (Exception ex)
             {
-                try
-                {
-                    School findSchool = new School();
-                    do
-                    {
-                        Console.WriteLine("Enter school ID: ");
-                        findSchool.Id = int.Parse(Console.ReadLine());
-                    }
-                    while (Validators.IsIntNoValid(findSchool.Id));
-
-                    do
-                    {
-                        Console.WriteLine("Enter name: ");
-                        findSchool.Name = Console.ReadLine();
-                    }
-                    while (Validators.IsStringNoValid(findSchool.Name));
-
-                    schoolController.Update(findSchool);
-                    Console.WriteLine("School update to database.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-
-
-
-            public void ListAll()
-            {
-                try
-                {
-                    Console.WriteLine(new string('-', 40));
-                    Console.WriteLine(new string(' ', 16) + "SCHOOLS" + new string(' ', 16));
-                    Console.WriteLine(new string('-', 40));
-                    var schools = schoolController.ListAll();
-                    foreach (var school in schools)
-                    {
-                        Console.WriteLine(new string('-', 40));
-                        Console.WriteLine("ID: " + school.Id);
-                        Console.WriteLine("Name: " + school.Name);
-                        //  Console.WriteLine("Students:");
-                        foreach (Student student in school.Students)
-                        {
-                            Console.WriteLine("Student: " + student.Id);
-                            Console.WriteLine("First name: " + student.FirstName);
-                            Console.WriteLine("Last name: " + student.LastName);
-                            Console.WriteLine("Age: " + student.Age);
-                        }
-                        if (school.Manager != null) Console.WriteLine("Manager: " + school.Manager.FirstName + " " + school.Manager.LastName);
-                        Console.WriteLine(new string('-', 40));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                Console.WriteLine(ex.Message);
             }
         }
     }
+ */
 }

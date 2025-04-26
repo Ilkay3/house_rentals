@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace house_rentals.Presentation
 {
     public interface IDisplay
-        {
+    {
             void ShowMenu();
             void Input();
             void Add();
             void Delete();
-            void Fetch();
+            void Extract();
             void Update();
             void ListAll();
-        }
+    }
 }

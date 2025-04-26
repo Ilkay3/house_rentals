@@ -16,6 +16,6 @@ namespace house_rentals.Date.Models
         [Column(TypeName = "VarChar(50)")]
         [Required]
         public string Name { get; set; } = string.Empty;
-        public ICollection<House_amenitie> HouseAmenities { get; set; } = new List<House_amenitie>();
+        public ICollection<House_Amenity> House_Amenities { get; set; } = new List<House_Amenity>();
     }
 }

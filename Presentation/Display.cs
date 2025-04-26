@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace house_rentals.Presentation
 {
+    /*
     public class Display
     {
          private int closeOperationId = 9;
@@ -68,4 +69,5 @@ namespace house_rentals.Presentation
              } while (operation != closeOperationId);
          }
     }
+    */
 }

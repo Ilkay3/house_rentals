@@ -10,7 +10,7 @@ namespace house_rentals.Date
         public DbSet<City> Cities { get; set; }
         public DbSet<Owner> Owners { get; set; }
         public DbSet<House> Houses { get; set; }
-        public DbSet<House_amenitie> House_Amanities { get; set; }
+        public DbSet<House_Amenity> House_Amenities { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
 
@@ -33,18 +33,18 @@ namespace house_rentals.Date
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<House_amenitie>()
+            modelBuilder.Entity<House_Amenity>()
                 .HasKey(ha => new { ha.HouseId, ha.AmenityId });
 
-            modelBuilder.Entity<House_amenitie>()
+            modelBuilder.Entity<House_Amenity>()
                 .HasOne(ha => ha.House)
-                .WithMany(h => h.HouseAmenities)
+                .WithMany(h => h.House_Amenities)
                 .HasForeignKey(ha => ha.HouseId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<House_amenitie>()
+            modelBuilder.Entity<House_Amenity>()
                 .HasOne(ha => ha.Amenity)
-                .WithMany(a => a.HouseAmenities)
+                .WithMany(a => a.House_Amenities)
                 .HasForeignKey(ha => ha.AmenityId)
                 .OnDelete(DeleteBehavior.Cascade);
 
