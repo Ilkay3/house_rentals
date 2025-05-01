@@ -12,11 +12,7 @@ namespace house_rentals.Bussines
     {
         private HouseRentalsDBContext houseRentalsDBContext = new HouseRentalsDBContext();
 
-        public HouseBusiness(HouseRentalsDBContext houseRentalsDBContext)
-        {
-            this.houseRentalsDBContext = houseRentalsDBContext;
-        }
-
+        public HouseBusiness() { }
         public void Add(House item)
         {
             using (houseRentalsDBContext = new HouseRentalsDBContext())

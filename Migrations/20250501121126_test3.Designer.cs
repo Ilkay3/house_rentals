@@ -12,8 +12,8 @@ using house_rentals.Date;
 namespace house_rentals.Migrations
 {
     [DbContext(typeof(HouseRentalsDBContext))]
-    [Migration("20250426173101_adasd")]
-    partial class adasd
+    [Migration("20250501121126_test3")]
+    partial class test3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

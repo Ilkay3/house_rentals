@@ -12,8 +12,8 @@ using house_rentals.Date;
 namespace house_rentals.Migrations
 {
     [DbContext(typeof(HouseRentalsDBContext))]
-    [Migration("20250426070719_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250501122628_test4")]
+    partial class test4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,10 +33,10 @@ namespace house_rentals.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("AmenityId"));
 
-                    b.Property<int?>("House_amenitieAmenityId")
+                    b.Property<int?>("House_AmenityAmenityId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("House_amenitieHouseId")
+                    b.Property<int?>("House_AmenityHouseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -45,7 +45,7 @@ namespace house_rentals.Migrations
 
                     b.HasKey("AmenityId");
 
-                    b.HasIndex("House_amenitieHouseId", "House_amenitieAmenityId");
+                    b.HasIndex("House_AmenityHouseId", "House_AmenityAmenityId");
 
                     b.ToTable("Amenities");
                 });
@@ -130,7 +130,7 @@ namespace house_rentals.Migrations
                     b.ToTable("Houses");
                 });
 
-            modelBuilder.Entity("house_rentals.Date.Models.House_amenitie", b =>
+            modelBuilder.Entity("house_rentals.Date.Models.House_Amenity", b =>
                 {
                     b.Property<int>("HouseId")
                         .HasColumnType("int");
@@ -142,7 +142,7 @@ namespace house_rentals.Migrations
 
                     b.HasIndex("AmenityId");
 
-                    b.ToTable("House_Amanities");
+                    b.ToTable("House_Amenities");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.Owner", b =>
@@ -248,9 +248,9 @@ namespace house_rentals.Migrations
 
             modelBuilder.Entity("house_rentals.Date.Models.Amenity", b =>
                 {
-                    b.HasOne("house_rentals.Date.Models.House_amenitie", null)
+                    b.HasOne("house_rentals.Date.Models.House_Amenity", null)
                         .WithMany("Amenities")
-                        .HasForeignKey("House_amenitieHouseId", "House_amenitieAmenityId");
+                        .HasForeignKey("House_AmenityHouseId", "House_AmenityAmenityId");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.Booking", b =>
@@ -291,16 +291,16 @@ namespace house_rentals.Migrations
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("house_rentals.Date.Models.House_amenitie", b =>
+            modelBuilder.Entity("house_rentals.Date.Models.House_Amenity", b =>
                 {
                     b.HasOne("house_rentals.Date.Models.Amenity", "Amenity")
-                        .WithMany("HouseAmenities")
+                        .WithMany("House_Amenities")
                         .HasForeignKey("AmenityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("house_rentals.Date.Models.House", "House")
-                        .WithMany("HouseAmenities")
+                        .WithMany("House_Amenities")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -334,7 +334,7 @@ namespace house_rentals.Migrations
 
             modelBuilder.Entity("house_rentals.Date.Models.Amenity", b =>
                 {
-                    b.Navigation("HouseAmenities");
+                    b.Navigation("House_Amenities");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.Booking", b =>
@@ -353,10 +353,10 @@ namespace house_rentals.Migrations
                 {
                     b.Navigation("Bookings");
 
-                    b.Navigation("HouseAmenities");
+                    b.Navigation("House_Amenities");
                 });
 
-            modelBuilder.Entity("house_rentals.Date.Models.House_amenitie", b =>
+            modelBuilder.Entity("house_rentals.Date.Models.House_Amenity", b =>
                 {
                     b.Navigation("Amenities");
                 });

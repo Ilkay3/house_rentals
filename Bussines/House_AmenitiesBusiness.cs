@@ -15,11 +15,6 @@ namespace house_rentals.Bussines
 
         public House_AmenitiesBusiness() { }
 
-        public House_AmenitiesBusiness(HouseRentalsDBContext houseRentalsDBContext)
-        {
-            this.houseRentalsDBContext = houseRentalsDBContext;
-        }
-
         public void Add(House_Amenity item)
         {
             using (houseRentalsDBContext = new HouseRentalsDBContext())
