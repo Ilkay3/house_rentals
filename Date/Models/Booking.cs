@@ -28,7 +28,5 @@ namespace house_rentals.Date.Models
         public DateTime EndDate { get; set; }
 
         public ICollection<Payment> Payments { get; set; } = new List<Payment>();
-        public ICollection<Tenant> Tenants { get; set; } = new List<Tenant>();
-
     }
 }

@@ -33,7 +33,5 @@ namespace house_rentals.Date.Models
         [Required]
         public string Email { get; set; } = string.Empty;
 
-        public ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
     }
 }

@@ -216,41 +216,6 @@ namespace house_rentals.Presentation
                 }
                 while (Validators.IsIntNoValid(findHouse.HouseId));
 
-                do
-                {
-                    Console.WriteLine("Enter house name: ");
-                    findHouse.Address = Console.ReadLine();
-                }
-                while (Validators.IsStringNoValid(findHouse.Address));
-
-                do
-                {
-                    Console.WriteLine("Enter description: ");
-                    findHouse.Description = Console.ReadLine();
-                }
-                while (Validators.IsStringNoValid(findHouse.Description));
-
-                do
-                {
-                    Console.WriteLine("Enter price: ");
-                    findHouse.Price = double.Parse(Console.ReadLine());
-                }
-                while (Validators.IsDoubleNoValid(findHouse.Price));
-
-                do
-                {
-                    Console.WriteLine("Enter city ID: ");
-                    findHouse.CityId = int.Parse(Console.ReadLine());
-                }
-                while (Validators.IsIntNoValid(findHouse.CityId));
-
-                do
-                {
-                    Console.WriteLine("Enter owner ID: ");
-                    findHouse.OwnerId = int.Parse(Console.ReadLine());
-                }
-                while (Validators.IsIntNoValid(findHouse.OwnerId));
-
                 House house = houseController.Get(findHouse);
                 Console.WriteLine(new string('-', 40));
                 Console.WriteLine("House ID: " + house.HouseId);

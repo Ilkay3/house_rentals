@@ -41,9 +41,9 @@ namespace house_rentals.Presentation
                      case 1:
                          AmenityDisplay amenity = new AmenityDisplay();
                          break;
-                    //case 2:
-                    //    BookingDisplay booking = new BookingDisplay();      //TO DO
-                    //    break;
+                    case 2:
+                        BookingDisplay booking = new BookingDisplay();
+                        break;
                     case 3:
                         CityDisplay city = new CityDisplay();
                         break;
@@ -51,17 +51,20 @@ namespace house_rentals.Presentation
                         HouseDisplay house = new HouseDisplay();
                         break;
                     //case 5:
-                    //    House_amenityDisplay house_amenity = new House_amenityDisplay();          //TO DO
+                    //    House_AmenitiesDisplay house_amenity = new House_AmenitiesDisplay();          //TO DO
                     //    break;
-                    //case 6:
-                    //    OwnerDisplay owner = new OwnerDisplay();
-                    //    break;
-                    //case 7:
-                    //    PaymentDisplay payment = new PaymentDisplay();
-                    //    break;
-                    //case 8:
-                    //    TenantDisplay tenat = new TenantDisplay();
-                    //    break;
+                    case 6:
+                        OwnerDisplay owner = new OwnerDisplay();
+                        break;
+                    case 7:
+                        PaymentDisplay payment = new PaymentDisplay();
+                        break;
+                    case 8:
+                        TenantDisplay tenat = new TenantDisplay();
+                        break;
+                    case 9:
+                        Console.WriteLine("Exiting Menu...");
+                        break;
                     default:
                          Console.WriteLine("Invalid operation");
                          break;

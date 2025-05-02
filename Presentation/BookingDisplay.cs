@@ -284,52 +284,6 @@ namespace house_rentals.Presentation
                 }
                 while (Validators.IsIntNoValid(findBooking.BookingId));
 
-                do
-                {
-                    Console.WriteLine("Enter house Id: ");
-                    findBooking.HouseId = int.Parse(Console.ReadLine());
-                }
-                while (Validators.IsIntNoValid(findBooking.HouseId));
-
-                do
-                {
-                    Console.WriteLine("Enter tenant Id: ");
-                    findBooking.TenantId = int.Parse(Console.ReadLine());
-                }
-                while (Validators.IsIntNoValid(findBooking.TenantId));
-
-                do
-                {
-                    Console.WriteLine("Enter StartDate (format: dd-mm-yyyy): ");
-                    string input = Console.ReadLine();
-
-                    if (DateTime.TryParse(input, out DateTime startDate))
-                    {
-                        findBooking.StartDate = startDate;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid date format. Please try again.");
-                    }
-                }
-                while (Validators.IsDateNoValid(findBooking.StartDate));
-
-                do
-                {
-                    Console.WriteLine("Enter EndDate (format: dd-mm-yyyy): ");
-                    string input = Console.ReadLine();
-
-                    if (DateTime.TryParse(input, out DateTime endDate))
-                    {
-                        findBooking.EndDate = endDate;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid date format. Please try again.");
-                    }
-                }
-                while (Validators.IsDateNoValid(findBooking.EndDate));
-
                 Booking booking = bookingController.Get(findBooking);
                 Console.WriteLine(new string('-', 40));
                 Console.WriteLine("Booking ID: " + booking.BookingId);

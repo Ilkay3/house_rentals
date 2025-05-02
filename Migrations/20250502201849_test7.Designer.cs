@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using house_rentals.Date;
 
@@ -11,9 +12,11 @@ using house_rentals.Date;
 namespace house_rentals.Migrations
 {
     [DbContext(typeof(HouseRentalsDBContext))]
-    partial class HouseRentalsDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250502201849_test7")]
+    partial class test7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,11 +33,19 @@ namespace house_rentals.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("AmenityId"));
 
+                    b.Property<int?>("House_AmenityAmenityId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("House_AmenityHouseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 
                     b.HasKey("AmenityId");
+
+                    b.HasIndex("House_AmenityHouseId", "House_AmenityAmenityId");
 
                     b.ToTable("Amenities");
                 });
@@ -185,9 +196,14 @@ namespace house_rentals.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
                     b.HasKey("PaymentId");
 
                     b.HasIndex("BookingId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Payments");
                 });
@@ -199,6 +215,9 @@ namespace house_rentals.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("TenantId"));
+
+                    b.Property<int?>("BookingId")
+                        .HasColumnType("int");
 
                     b.Property<string>("EGN")
                         .IsRequired()
@@ -222,7 +241,16 @@ namespace house_rentals.Migrations
 
                     b.HasKey("TenantId");
 
+                    b.HasIndex("BookingId");
+
                     b.ToTable("Tenants");
+                });
+
+            modelBuilder.Entity("house_rentals.Date.Models.Amenity", b =>
+                {
+                    b.HasOne("house_rentals.Date.Models.House_Amenity", null)
+                        .WithMany("Amenities")
+                        .HasForeignKey("House_AmenityHouseId", "House_AmenityAmenityId");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.Booking", b =>
@@ -272,7 +300,7 @@ namespace house_rentals.Migrations
                         .IsRequired();
 
                     b.HasOne("house_rentals.Date.Models.House", "House")
-                        .WithMany()
+                        .WithMany("House_Amenities")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -290,7 +318,18 @@ namespace house_rentals.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("house_rentals.Date.Models.Tenant", null)
+                        .WithMany("Payments")
+                        .HasForeignKey("TenantId");
+
                     b.Navigation("Booking");
+                });
+
+            modelBuilder.Entity("house_rentals.Date.Models.Tenant", b =>
+                {
+                    b.HasOne("house_rentals.Date.Models.Booking", null)
+                        .WithMany("Tenants")
+                        .HasForeignKey("BookingId");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.Amenity", b =>
@@ -301,6 +340,8 @@ namespace house_rentals.Migrations
             modelBuilder.Entity("house_rentals.Date.Models.Booking", b =>
                 {
                     b.Navigation("Payments");
+
+                    b.Navigation("Tenants");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.City", b =>
@@ -311,11 +352,23 @@ namespace house_rentals.Migrations
             modelBuilder.Entity("house_rentals.Date.Models.House", b =>
                 {
                     b.Navigation("Bookings");
+
+                    b.Navigation("House_Amenities");
+                });
+
+            modelBuilder.Entity("house_rentals.Date.Models.House_Amenity", b =>
+                {
+                    b.Navigation("Amenities");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.Owner", b =>
                 {
                     b.Navigation("Houses");
+                });
+
+            modelBuilder.Entity("house_rentals.Date.Models.Tenant", b =>
+                {
+                    b.Navigation("Payments");
                 });
 #pragma warning restore 612, 618
         }

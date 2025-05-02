@@ -1,4 +1,5 @@
 ﻿//using house_rentals.Controllers;
+//using house_rentals.Date;
 //using house_rentals.Date.Models;
 //using System;
 //using System.Collections.Generic;
@@ -85,7 +86,7 @@
 
 //                do
 //                {
-//                    Console.WriteLine("Enter city name: ");
+//                    Console.WriteLine("Enter house Id: ");
 //                    newHouse_Amenity.AmenityId = int.Parse(Console.ReadLine());
 //                }
 //                while (Validators.IsIntNoValid(newHouse_Amenity.AmenityId));
@@ -174,10 +175,10 @@
 //                }
 //                while (Validators.IsIntNoValid(findHouse_Amenity.AmenityId));
 
-//                house_AmenitiesController.Get(findHouse_Amenity);
+//                House_Amenity house_Amenity = house_AmenitiesController.Get(findHouse_Amenity);
 //                Console.WriteLine(new string('-', 40));
-//                Console.WriteLine("City ID: " + city.CityId);
-//                Console.WriteLine("Name: " + city.Name);
+//                Console.WriteLine("House ID: " + house_Amenity.HouseId);
+//                Console.WriteLine("Amenity ID: " + house_Amenity.AmenityId);
 //                Console.WriteLine(new string('-', 40));
 //            }
 //            catch (Exception ex)
@@ -191,14 +192,14 @@
 //            try
 //            {
 //                Console.WriteLine(new string('-', 40));
-//                Console.WriteLine(new string(' ', 16) + "CITIES" + new string(' ', 16));
+//                Console.WriteLine(new string(' ', 16) + "HOUSE_AMENITIES" + new string(' ', 16));
 //                Console.WriteLine(new string('-', 40));
-//                var cities = cityController.ListAll();
-//                foreach (var city in cities)
+//                var house_Amenities = house_AmenitiesController.ListAll();
+//                foreach (var house_Amenity in house_Amenities)
 //                {
 //                    Console.WriteLine(new string('-', 40));
-//                    Console.WriteLine("City ID: " + city.CityId);
-//                    Console.WriteLine("Name: " + city.Name);
+//                    Console.WriteLine("House ID: " + house_Amenity.HouseId);
+//                    Console.WriteLine("Amenity ID: " + house_Amenity.AmenityId);
 //                    Console.WriteLine(new string('-', 40));
 //                }
 //            }

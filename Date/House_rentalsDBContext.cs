@@ -36,11 +36,11 @@ namespace house_rentals.Date
             modelBuilder.Entity<House_Amenity>()
                 .HasKey(ha => new { ha.HouseId, ha.AmenityId });
 
-            modelBuilder.Entity<House_Amenity>()
-                .HasOne(ha => ha.House)
-                .WithMany(h => h.House_Amenities)
-                .HasForeignKey(ha => ha.HouseId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<House_Amenity>()
+            //    .HasOne(ha => ha.House)
+            //    .WithMany(h => h.House_Amenities)
+            //    .HasForeignKey(ha => ha.HouseId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<House_Amenity>()
                 .HasOne(ha => ha.Amenity)

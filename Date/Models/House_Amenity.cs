@@ -18,6 +18,5 @@ namespace house_rentals.Date.Models
         public int AmenityId { get; set; }
         public Amenity Amenity { get; set; } = null!;
 
-        public ICollection<Amenity> Amenities { get; set; } = new List<Amenity>();
     }
 }

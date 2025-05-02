@@ -22,7 +22,7 @@ namespace house_rentals.Date.Models
 
         [Column(TypeName = "VarChar(50)")]
         [Required]
-        public string Payment_method { get; set; } = string.Empty;
+        public string PaymentMethod { get; set; } = string.Empty;
 
     }
 }
