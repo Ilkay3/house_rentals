@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace house_rentals.Presentation
 {
-    /*
+  
     public class Display
     {
          private int closeOperationId = 9;
@@ -41,33 +41,32 @@ namespace house_rentals.Presentation
                      case 1:
                          AmenityDisplay amenity = new AmenityDisplay();
                          break;
-                     case 2:
-                         BookingDisplay booking = new BookingDisplay();
-                         break;
-                     case 3:
-                         CityDisplay city = new CityDisplay();
-                         break;
-                     case 4:
-                         HouseDisplay house = new HouseDisplay();
-                         break;
-                     case 5:
-                         House_amenityDisplay house_amenity = new House_amenityDisplay();
-                         break;
-                     case 6:
-                         OwnerDisplay owner = new OwnerDisplay();
-                         break;
-                     case 7:
-                         PaymentDisplay payment = new PaymentDisplay();
-                         break;
-                     case 8:
-                         TenantDisplay tenat = new TenantDisplay();
-                         break;
-                     default:
+                    //case 2:
+                    //    BookingDisplay booking = new BookingDisplay();
+                    //    break;
+                    //case 3:
+                    //    CityDisplay city = new CityDisplay();
+                    //    break;
+                    //case 4:
+                    //    HouseDisplay house = new HouseDisplay();
+                    //    break;
+                    //case 5:
+                    //    House_amenityDisplay house_amenity = new House_amenityDisplay();
+                    //    break;
+                    //case 6:
+                    //    OwnerDisplay owner = new OwnerDisplay();
+                    //    break;
+                    //case 7:
+                    //    PaymentDisplay payment = new PaymentDisplay();
+                    //    break;
+                    //case 8:
+                    //    TenantDisplay tenat = new TenantDisplay();
+                    //    break;
+                    default:
                          Console.WriteLine("Invalid operation");
                          break;
                  }
              } while (operation != closeOperationId);
          }
     }
-    */
 }

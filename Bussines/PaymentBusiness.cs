@@ -14,6 +14,11 @@ namespace house_rentals.Bussines
 
         public PaymentBusiness() { }
 
+        public PaymentBusiness(HouseRentalsDBContext houseRentalsDBContext)
+        {
+            this.houseRentalsDBContext = houseRentalsDBContext;
+        }
+
         public void Add(Payment item)
         {
             using (houseRentalsDBContext = new HouseRentalsDBContext())

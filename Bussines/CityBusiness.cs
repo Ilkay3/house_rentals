@@ -14,6 +14,11 @@ namespace house_rentals.Bussines
 
         public CityBusiness() { }
 
+        public CityBusiness(HouseRentalsDBContext houseRentalsDBContext)
+        {
+            this.houseRentalsDBContext = houseRentalsDBContext;
+        }
+
         public void Add(City item)
         {
             using (houseRentalsDBContext = new HouseRentalsDBContext())

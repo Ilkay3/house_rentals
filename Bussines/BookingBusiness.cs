@@ -8,61 +8,66 @@ using System.Threading.Tasks;
 
 namespace house_rentals.Bussines
 {
-        public class BookingBusiness : ICRUD<Booking>
-        {
-            private HouseRentalsDBContext houseRentalsDBContext = new HouseRentalsDBContext();
+    public class BookingBusiness : ICRUD<Booking>
+    {
+        private HouseRentalsDBContext houseRentalsDBContext = new HouseRentalsDBContext();
 
         public BookingBusiness() { }
 
-            public void Add(Booking item)
+        public BookingBusiness(HouseRentalsDBContext houseRentalsDBContext)
+        {
+            this.houseRentalsDBContext = houseRentalsDBContext;
+        }
+
+        public void Add(Booking item)
+        {
+            using (houseRentalsDBContext = new HouseRentalsDBContext())
             {
-                using (houseRentalsDBContext = new HouseRentalsDBContext())
+                houseRentalsDBContext.Bookings.Add(item);
+                houseRentalsDBContext.SaveChanges();
+            }
+        }
+
+        public void Delete(Booking item)
+        {
+            using (houseRentalsDBContext = new HouseRentalsDBContext())
+            {
+                var booking = houseRentalsDBContext.Bookings.Find(item.BookingId);
+                if (booking != null)
                 {
-                    houseRentalsDBContext.Bookings.Add(item);
+                    houseRentalsDBContext.Bookings.Remove(booking);
                     houseRentalsDBContext.SaveChanges();
                 }
             }
+        }
 
-            public void Delete(Booking item)
+        public Booking Get(Booking item)
+        {
+            using (houseRentalsDBContext = new HouseRentalsDBContext())
             {
-                using (houseRentalsDBContext = new HouseRentalsDBContext())
-                {
-                    var booking = houseRentalsDBContext.Bookings.Find(item.BookingId);
-                    if (booking != null)
-                    {
-                        houseRentalsDBContext.Bookings.Remove(booking);
-                        houseRentalsDBContext.SaveChanges();
-                    }
-                }
+                return houseRentalsDBContext.Bookings.Where(x => x.BookingId == item.BookingId).FirstOrDefault();
             }
+        }
 
-            public Booking Get(Booking item)
+        public List<Booking> GetAll()
+        {
+            using (houseRentalsDBContext = new HouseRentalsDBContext())
             {
-                using (houseRentalsDBContext = new HouseRentalsDBContext())
-                {
-                    return houseRentalsDBContext.Bookings.Where(x => x.BookingId == item.BookingId).FirstOrDefault();
-                }
+                return houseRentalsDBContext.Bookings.ToList();
             }
+        }
 
-            public List<Booking> GetAll()
+        public void Update(Booking item)
+        {
+            using (houseRentalsDBContext = new HouseRentalsDBContext())
             {
-                using (houseRentalsDBContext = new HouseRentalsDBContext())
+                var booking = houseRentalsDBContext.Bookings.Find(item.BookingId);
+                if (booking != null)
                 {
-                    return houseRentalsDBContext.Bookings.ToList();
-                }
-            }
-
-            public void Update(Booking item)
-            {
-                using (houseRentalsDBContext = new HouseRentalsDBContext())
-                {
-                    var booking = houseRentalsDBContext.Bookings.Find(item.BookingId);
-                    if (booking != null)
-                    {
-                        houseRentalsDBContext.Entry(booking).CurrentValues.SetValues(item);
-                        houseRentalsDBContext.SaveChanges();
-                    }
+                    houseRentalsDBContext.Entry(booking).CurrentValues.SetValues(item);
+                    houseRentalsDBContext.SaveChanges();
                 }
             }
         }
+    }
 }

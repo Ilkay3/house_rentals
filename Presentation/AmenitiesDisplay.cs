@@ -9,15 +9,20 @@ using System.Threading.Tasks;
 
 namespace house_rentals.Presentation
 {
- /*   public class AmenityDisplay : IDisplay
+   public class AmenityDisplay : IDisplay
     {
         private int closeOperationId = 6;
-        private AmenityController controller = new AmenityController();
+        private IController<Amenity> amenityController = new AmenityController();
+
+        public AmenityDisplay()
+        {
+            Input();
+        }
 
         public AmenityDisplay(IController<Amenity> amenityController)
         {
             Input();
-            this.AmenityController = amenityController;
+            this.amenityController = amenityController;
         }
 
         public void ShowMenu()
@@ -35,11 +40,11 @@ namespace house_rentals.Presentation
 
         public void Input()
         {
-            Console.Write("Enter your choice: ");
-            int operation = operation = int.Parse(Console.ReadLine());
+            var operation = -1;
             do
             {
                 ShowMenu();
+                operation = int.Parse(Console.ReadLine());
                 switch (operation)
                 {
                     case 1:
@@ -57,28 +62,37 @@ namespace house_rentals.Presentation
                     case 5:
                         ListAll();
                         break;
-                    case 0:
+                    case 6:
                         Console.WriteLine("Exiting Amenity Menu...");
                         break;
                     default:
                         Console.WriteLine("Invalid choice.");
                         break;
                 }
-            } while (operation != 0);
+            } while (operation != closeOperationId);
         }
 
         public void Add()
         {
             try
             {
-                Amenity amenity = new Amenity();
-                do 
+                Amenity newAmenity = new Amenity();
+                do
                 {
-                    Console.WriteLine("Enter amanity Id: ");
-                    new Amenity.Id = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Amenity added successfully!");
+                    Console.WriteLine("Enter amenity Id: ");
+                    newAmenity.AmenityId = int.Parse(Console.ReadLine());
                 }
-                while (Validators.IsIntNoValid(newAmenity.Id));
+                while (Validators.IsIntNoValid(newAmenity.AmenityId));
+                
+                do
+                {
+                    Console.WriteLine("Enter amenity name: ");
+                    newAmenity.Name = Console.ReadLine();
+                }
+                while (Validators.IsStringNoValid(newAmenity.Name));
+                
+                amenityController.Add(newAmenity);
+                Console.WriteLine("Amenity added to database.");
             }
             catch (Exception ex)
             {
@@ -88,13 +102,18 @@ namespace house_rentals.Presentation
 
         public void Delete()
         {
-            Console.Write("Enter Amenity ID to delete: ");
-            int id = Convert.ToInt32(Console.ReadLine());
-
             try
             {
-                controller.Delete(new Amenity { AmenityId = id });
-                Console.WriteLine("Amenity deleted successfully!");
+                Amenity findAmenity = new Amenity();
+                do
+                {
+                    Console.WriteLine("Enter amenity Id to delete: ");
+                    findAmenity.AmenityId = int.Parse(Console.ReadLine());
+                }
+                while (Validators.IsIntNoValid(findAmenity.AmenityId));
+
+                amenityController.Delete(findAmenity);
+                Console.WriteLine("Done.");
             }
             catch (Exception ex)
             {
@@ -104,16 +123,24 @@ namespace house_rentals.Presentation
 
         public void Update()
         {
-            Console.Write("Enter Amenity ID to update: ");
-            int id = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter new Amenity Name: ");
-            string name = Console.ReadLine() ?? string.Empty;
-
-            Amenity amenity = new Amenity { AmenityId = id, Name = name };
             try
             {
-                controller.Update(amenity);
-                Console.WriteLine("Amenity updated successfully!");
+                Amenity findAmenity = new Amenity();
+                do
+                {
+                    Console.WriteLine("Enter amenity Id to update: ");
+                    findAmenity.AmenityId = int.Parse(Console.ReadLine());
+                }
+                while (Validators.IsIntNoValid(findAmenity.AmenityId));
+                do
+                {
+                    Console.WriteLine("Enter amenity name: ");
+                    findAmenity.Name = Console.ReadLine();
+                }
+                while (Validators.IsStringNoValid(findAmenity.Name));
+
+                amenityController.Update(findAmenity);
+                Console.WriteLine("Amenity update to database.");
             }
             catch (Exception ex)
             {
@@ -123,13 +150,21 @@ namespace house_rentals.Presentation
 
         public void Extract()
         {
-            Console.Write("Enter Amenity ID to extract: ");
-            int id = Convert.ToInt32(Console.ReadLine());
-
             try
             {
-                var amenity = controller.Get(new Amenity { AmenityId = id });
-                Console.WriteLine($"Amenity: ID = {amenity.AmenityId}, Name = {amenity.Name}");
+                Amenity findAmenity = new Amenity();
+                do
+                {
+                    Console.WriteLine("Enter amenity Id to extract: ");
+                    findAmenity.AmenityId = int.Parse(Console.ReadLine());
+                }
+                while (Validators.IsIntNoValid(findAmenity.AmenityId));
+
+                Amenity amenity = amenityController.Get(findAmenity);
+                Console.WriteLine(new string('-', 40));
+                Console.WriteLine("Amenity ID: " + amenity.AmenityId);
+                Console.WriteLine("Name: " + amenity.Name);
+                Console.WriteLine(new string('-', 40));
             }
             catch (Exception ex)
             {
@@ -141,11 +176,16 @@ namespace house_rentals.Presentation
         {
             try
             {
-                var amenities = controller.ListAll();
-                Console.WriteLine("\nList of Amenities:");
-                foreach (var a in amenities)
+                Console.WriteLine(new string('-', 40));
+                Console.WriteLine(new string(' ', 16) + "AMENITIES" + new string(' ', 16));
+                Console.WriteLine(new string('-', 40));
+                var amenities = amenityController.ListAll();
+                foreach (var amenity in amenities)
                 {
-                    Console.WriteLine($"ID: {a.AmenityId}, Name: {a.Name}");
+                    Console.WriteLine(new string('-', 40));
+                    Console.WriteLine("Amenity ID: " + amenity.AmenityId);
+                    Console.WriteLine("Name: " + amenity.Name);
+                    Console.WriteLine(new string('-', 40));
                 }
             }
             catch (Exception ex)
@@ -154,5 +194,4 @@ namespace house_rentals.Presentation
             }
         }
     }
- */
 }
