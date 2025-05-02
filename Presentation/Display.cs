@@ -42,16 +42,16 @@ namespace house_rentals.Presentation
                          AmenityDisplay amenity = new AmenityDisplay();
                          break;
                     //case 2:
-                    //    BookingDisplay booking = new BookingDisplay();
+                    //    BookingDisplay booking = new BookingDisplay();      //TO DO
                     //    break;
-                    //case 3:
-                    //    CityDisplay city = new CityDisplay();
-                    //    break;
-                    //case 4:
-                    //    HouseDisplay house = new HouseDisplay();
-                    //    break;
+                    case 3:
+                        CityDisplay city = new CityDisplay();
+                        break;
+                    case 4:
+                        HouseDisplay house = new HouseDisplay();
+                        break;
                     //case 5:
-                    //    House_amenityDisplay house_amenity = new House_amenityDisplay();
+                    //    House_amenityDisplay house_amenity = new House_amenityDisplay();          //TO DO
                     //    break;
                     //case 6:
                     //    OwnerDisplay owner = new OwnerDisplay();

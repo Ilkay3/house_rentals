@@ -18,5 +18,15 @@ namespace house_rentals.Presentation
         {
             return int.IsNegative(number) || number == 0;
         }
+
+        public static bool IsDateNoValid(DateTime date)
+        {
+            return date == default(DateTime) || date == DateTime.MinValue;
+        }
+
+        public static bool IsDoubleNoValid(double dNumber)
+        {
+            return double.IsNegative(dNumber) || dNumber == 0;
+        }
     }
 }
