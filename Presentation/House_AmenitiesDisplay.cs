@@ -2,7 +2,7 @@
 using house_rentals.Date;
 using house_rentals.Date.Models;
 using House_Rentals.Controllers;
-using House_Rentals.Presentation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace house_rentals.Presentation
 {
     public class House_AmenitiesDisplay : IDisplay
     {
-        private int closeOperationId = 6;
+        private int closeOperationId = 5;
         private IController<House_Amenity> house_AmenitiesController = new House_AmenitiesController();
 
         public House_AmenitiesDisplay()
@@ -34,10 +34,9 @@ namespace house_rentals.Presentation
             Console.WriteLine(new string('-', 40));
             Console.WriteLine("1. Add House Amenities");
             Console.WriteLine("2. Delete House Amenities");
-            Console.WriteLine("3. Update House Amenities");
+            Console.WriteLine("3. List All House Amenities");
             Console.WriteLine("4. Extract House Amenities");
-            Console.WriteLine("5. List All House Amenities");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("5. Exit");
         }
 
         public void Input()
@@ -56,15 +55,12 @@ namespace house_rentals.Presentation
                         Delete();
                         break;
                     case 3:
-                        Update();
+                        ListAll();
                         break;
                     case 4:
                         Extract();
                         break;
                     case 5:
-                        ListAll();
-                        break;
-                    case 6:
                         Console.WriteLine("Exiting House Amenities Menu...");
                         break;
                     default:
@@ -73,34 +69,6 @@ namespace house_rentals.Presentation
                 }
             } while (operation != closeOperationId);
         }
-
-        //public void Add()
-        //{
-        //    try
-        //    {
-        //        House_Amenity newHouse_Amenity = new House_Amenity();
-        //        do
-        //        {
-        //            Console.WriteLine("Enter house amenity Id: ");
-        //            newHouse_Amenity.HouseId = int.Parse(Console.ReadLine());
-        //        }
-        //        while (Validators.IsIntNoValid(newHouse_Amenity.HouseId));
-
-        //        do
-        //        {
-        //            Console.WriteLine("Enter house Id: ");
-        //            newHouse_Amenity.AmenityId = int.Parse(Console.ReadLine());
-        //        }
-        //        while (Validators.IsIntNoValid(newHouse_Amenity.AmenityId));
-
-        //        house_AmenitiesController.Add(newHouse_Amenity);
-        //        Console.WriteLine("House amenity added to database.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.Message);
-        //    }
-        //}
 
         public void Add()
         {
@@ -124,7 +92,6 @@ namespace house_rentals.Presentation
 
                 using var db = new HouseRentalsDBContext();
 
-                // Validate foreign keys exist
                 bool houseExists = db.Houses.Any(h => h.HouseId == newHouse_Amenity.HouseId);
                 bool amenityExists = db.Amenities.Any(a => a.AmenityId == newHouse_Amenity.AmenityId);
 
@@ -140,7 +107,6 @@ namespace house_rentals.Presentation
                     return;
                 }
 
-                // Prevent duplicate join entries
                 bool alreadyConnected = db.House_Amenities.Any(ha =>
                     ha.HouseId == newHouse_Amenity.HouseId &&
                     ha.AmenityId == newHouse_Amenity.AmenityId);
@@ -159,7 +125,6 @@ namespace house_rentals.Presentation
                 Console.WriteLine("Error: " + ex.Message);
             }
         }
-
 
         public void Delete()
         {

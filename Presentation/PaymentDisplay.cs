@@ -155,7 +155,7 @@ namespace house_rentals.Presentation
                     findPayment.PaymentId = int.Parse(Console.ReadLine());
                 }
                 while (Validators.IsIntNoValid(findPayment.PaymentId));
-                
+
                 do
                 {
                     Console.WriteLine("Enter booking Id: ");

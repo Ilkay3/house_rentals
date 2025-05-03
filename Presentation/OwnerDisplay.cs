@@ -160,7 +160,7 @@ namespace house_rentals.Presentation
                     findOwner.OwnerId = int.Parse(Console.ReadLine());
                 }
                 while (Validators.IsIntNoValid(findOwner.OwnerId));
-                
+
                 do
                 {
                     Console.WriteLine("Enter owner first name: ");

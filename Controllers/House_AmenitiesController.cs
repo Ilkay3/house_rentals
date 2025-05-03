@@ -22,19 +22,6 @@ namespace house_rentals.Controllers
             this.house_AmenitiesBusiness = house_AmenitiesBusiness;
         }
 
-        //public void Add(House_Amenity newHouse_Amenities)
-        //{
-        //    House_Amenity house_Amenity = house_AmenitiesBusiness.Get(newHouse_Amenities);
-        //    if (house_Amenity != null)
-        //    {
-        //        house_AmenitiesBusiness.Add(newHouse_Amenities);
-        //    }
-        //    else
-        //    {
-        //        throw new ArgumentException("House amenity with this ID already exists.");
-        //    }
-        //}
-
         public void Add(House_Amenity houseAmenity)
         {
             using var db = new HouseRentalsDBContext();
@@ -52,20 +39,21 @@ namespace house_rentals.Controllers
 
         public void Delete(House_Amenity findHouse_Amenity)
         {
-            House_Amenity house_Amenity = house_AmenitiesBusiness.Get(findHouse_Amenity);
-            if (house_Amenity == null)
+            House_Amenity house_AmenityToDelete = house_AmenitiesBusiness.Get(findHouse_Amenity);
+
+            if (house_AmenityToDelete != null)
             {
-                house_AmenitiesBusiness.Delete(findHouse_Amenity);
+                house_AmenitiesBusiness.Delete(house_AmenityToDelete);
             }
             else
             {
-                throw new ArgumentException("House amenity not found.");
+                throw new ArgumentException($"House amenity with HouseId {findHouse_Amenity.HouseId} and AmenityId {findHouse_Amenity.AmenityId} not found.");
             }
         }
 
         public House_Amenity Get(House_Amenity findHouse_Amenity)
         {
-            return house_AmenitiesBusiness.GetAll().FirstOrDefault(x =>x.HouseId == findHouse_Amenity.HouseId && x.AmenityId == findHouse_Amenity.AmenityId);
+            return house_AmenitiesBusiness.GetAll().FirstOrDefault(x => x.HouseId == findHouse_Amenity.HouseId && x.AmenityId == findHouse_Amenity.AmenityId);
         }
 
         public List<House_Amenity> ListAll()

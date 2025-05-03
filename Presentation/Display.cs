@@ -5,42 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 namespace house_rentals.Presentation
 {
-  
+
     public class Display
     {
-         private int closeOperationId = 9;
-         public Display()
-         {
-             Input();
-         }
-        
-         public void ShowMenu()
-         {
-             Console.WriteLine(new string('-', 40));
-             Console.WriteLine(new string(' ', 8) + "MENU" + new string(' ', 8));
-             Console.WriteLine(new string('-', 40));
-             Console.WriteLine("1. Amenities");
-             Console.WriteLine("2. Bookings");
-             Console.WriteLine("3. Cities");
-             Console.WriteLine("4. Houses");
-             Console.WriteLine("5. House_amenities");
-             Console.WriteLine("6. Owners");
-             Console.WriteLine("7. Payments");
-             Console.WriteLine("8. Tenants");
-             Console.WriteLine("9. Exit");
-         }
-         public void Input()
-         {
-             var operation = -1;
-             do
-             {
-                 ShowMenu();
-                 operation = int.Parse(Console.ReadLine());
-                 switch (operation)
-                 {
-                     case 1:
-                         AmenityDisplay amenity = new AmenityDisplay();
-                         break;
+        private int closeOperationId = 9;
+        public Display()
+        {
+            Input();
+        }
+
+        public void ShowMenu()
+        {
+            Console.WriteLine(new string('-', 40));
+            Console.WriteLine(new string(' ', 8) + "MENU" + new string(' ', 8));
+            Console.WriteLine(new string('-', 40));
+            Console.WriteLine("1. Amenities");
+            Console.WriteLine("2. Bookings");
+            Console.WriteLine("3. Cities");
+            Console.WriteLine("4. Houses");
+            Console.WriteLine("5. House_amenities");
+            Console.WriteLine("6. Owners");
+            Console.WriteLine("7. Payments");
+            Console.WriteLine("8. Tenants");
+            Console.WriteLine("9. Exit");
+        }
+        public void Input()
+        {
+            var operation = -1;
+            do
+            {
+                ShowMenu();
+                operation = int.Parse(Console.ReadLine());
+                switch (operation)
+                {
+                    case 1:
+                        AmenityDisplay amenity = new AmenityDisplay();
+                        break;
                     case 2:
                         BookingDisplay booking = new BookingDisplay();
                         break;
@@ -51,7 +51,7 @@ namespace house_rentals.Presentation
                         HouseDisplay house = new HouseDisplay();
                         break;
                     case 5:
-                        House_AmenitiesDisplay house_amenity = new House_AmenitiesDisplay();          //to do
+                        House_AmenitiesDisplay house_amenity = new House_AmenitiesDisplay();
                         break;
                     case 6:
                         OwnerDisplay owner = new OwnerDisplay();
@@ -66,10 +66,10 @@ namespace house_rentals.Presentation
                         Console.WriteLine("Exiting Menu...");
                         break;
                     default:
-                         Console.WriteLine("Invalid operation");
-                         break;
-                 }
-             } while (operation != closeOperationId);
-         }
+                        Console.WriteLine("Invalid operation");
+                        break;
+                }
+            } while (operation != closeOperationId);
+        }
     }
 }

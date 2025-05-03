@@ -84,14 +84,14 @@ namespace house_rentals.Presentation
                     newAmenity.AmenityId = int.Parse(Console.ReadLine());
                 }
                 while (Validators.IsIntNoValid(newAmenity.AmenityId));
-                
+
                 do
                 {
                     Console.WriteLine("Enter amenity name: ");
                     newAmenity.Name = Console.ReadLine();
                 }
                 while (Validators.IsStringNoValid(newAmenity.Name));
-                
+
                 amenityController.Add(newAmenity);
                 Console.WriteLine("Amenity added to database.");
             }

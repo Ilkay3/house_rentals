@@ -8,12 +8,12 @@ namespace house_rentals.Presentation
 {
     public interface IDisplay
     {
-            void ShowMenu();
-            void Input();
-            void Add();
-            void Delete();
-            void Extract();
-            void Update();
-            void ListAll();
+        void ShowMenu();
+        void Input();
+        void Add();
+        void Delete();
+        void Extract();
+        void Update();
+        void ListAll();
     }
 }
