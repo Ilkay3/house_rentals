@@ -13,5 +13,6 @@ namespace House_Rentals.Controllers
         T Get(T item);
         void Update(T item);
         List<T> ListAll();
+        IEnumerable<object> GetByHouseId(int houseId);
     }
 }

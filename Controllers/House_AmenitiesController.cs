@@ -1,6 +1,8 @@
 ﻿using house_rentals.Bussines;
+using house_rentals.Date;
 using house_rentals.Date.Models;
 using House_Rentals.Controllers;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,17 +22,32 @@ namespace house_rentals.Controllers
             this.house_AmenitiesBusiness = house_AmenitiesBusiness;
         }
 
-        public void Add(House_Amenity newHouse_Amenities)
+        //public void Add(House_Amenity newHouse_Amenities)
+        //{
+        //    House_Amenity house_Amenity = house_AmenitiesBusiness.Get(newHouse_Amenities);
+        //    if (house_Amenity != null)
+        //    {
+        //        house_AmenitiesBusiness.Add(newHouse_Amenities);
+        //    }
+        //    else
+        //    {
+        //        throw new ArgumentException("House amenity with this ID already exists.");
+        //    }
+        //}
+
+        public void Add(House_Amenity houseAmenity)
         {
-            House_Amenity house_Amenity = house_AmenitiesBusiness.Get(newHouse_Amenities);
-            if (house_Amenity != null)
+            using var db = new HouseRentalsDBContext();
+
+            bool alreadyExists = db.House_Amenities.Any(h => h.HouseId == houseAmenity.HouseId && h.AmenityId == houseAmenity.AmenityId);
+
+            if (alreadyExists)
             {
-                house_AmenitiesBusiness.Add(newHouse_Amenities);
+                throw new Exception("This house is already connected to this amenity.");
             }
-            else
-            {
-                throw new ArgumentException("House amenity with this ID already exists.");
-            }
+
+            db.House_Amenities.Add(houseAmenity);
+            db.SaveChanges();
         }
 
         public void Delete(House_Amenity findHouse_Amenity)
