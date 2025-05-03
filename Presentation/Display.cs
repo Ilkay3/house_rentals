@@ -50,9 +50,9 @@ namespace house_rentals.Presentation
                     case 4:
                         HouseDisplay house = new HouseDisplay();
                         break;
-                    //case 5:
-                    //    House_AmenitiesDisplay house_amenity = new House_AmenitiesDisplay();          //TO DO
-                    //    break;
+                    case 5:
+                        House_AmenitiesDisplay house_amenity = new House_AmenitiesDisplay();          //to do
+                        break;
                     case 6:
                         OwnerDisplay owner = new OwnerDisplay();
                         break;

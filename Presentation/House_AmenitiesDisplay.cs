@@ -1,6 +1,8 @@
 ﻿//using house_rentals.Controllers;
 //using house_rentals.Date;
 //using house_rentals.Date.Models;
+//using House_Rentals.Controllers;
+//using House_Rentals.Presentation;
 //using System;
 //using System.Collections.Generic;
 //using System.Linq;
@@ -72,33 +74,92 @@
 //            } while (operation != closeOperationId);
 //        }
 
+//        //public void Add()
+//        //{
+//        //    try
+//        //    {
+//        //        House_Amenity newHouse_Amenity = new House_Amenity();
+//        //        do
+//        //        {
+//        //            Console.WriteLine("Enter house amenity Id: ");
+//        //            newHouse_Amenity.HouseId = int.Parse(Console.ReadLine());
+//        //        }
+//        //        while (Validators.IsIntNoValid(newHouse_Amenity.HouseId));
+
+//        //        do
+//        //        {
+//        //            Console.WriteLine("Enter house Id: ");
+//        //            newHouse_Amenity.AmenityId = int.Parse(Console.ReadLine());
+//        //        }
+//        //        while (Validators.IsIntNoValid(newHouse_Amenity.AmenityId));
+
+//        //        house_AmenitiesController.Add(newHouse_Amenity);
+//        //        Console.WriteLine("House amenity added to database.");
+//        //    }
+//        //    catch (Exception ex)
+//        //    {
+//        //        Console.WriteLine(ex.Message);
+//        //    }
+//        //}
+
 //        public void Add()
 //        {
 //            try
 //            {
+//                using var db = new HouseRentalsDBContext();
 //                House_Amenity newHouse_Amenity = new House_Amenity();
-//                do
-//                {
-//                    Console.WriteLine("Enter house amenity Id: ");
-//                    newHouse_Amenity.HouseId = int.Parse(Console.ReadLine());
-//                }
-//                while (Validators.IsIntNoValid(newHouse_Amenity.HouseId));
 
+//                // Get and validate HouseId
+//                int houseId;
 //                do
 //                {
-//                    Console.WriteLine("Enter house Id: ");
-//                    newHouse_Amenity.AmenityId = int.Parse(Console.ReadLine());
+//                    Console.Write("Enter House ID: ");
+//                } while (!int.TryParse(Console.ReadLine(), out houseId) || Validators.IsIntNoValid(houseId));
+
+//                // Confirm House exists
+//                var house = db.Houses.Find(houseId);
+//                if (house == null)
+//                {
+//                    Console.WriteLine("House not found.");
+//                    return;
 //                }
-//                while (Validators.IsIntNoValid(newHouse_Amenity.AmenityId));
+
+//                // Get and validate AmenityId
+//                int amenityId;
+//                do
+//                {
+//                    Console.Write("Enter Amenity ID: ");
+//                } while (!int.TryParse(Console.ReadLine(), out amenityId) || Validators.IsIntNoValid(amenityId));
+
+//                // Confirm Amenity exists
+//                var amenity = db.Amenities.Find(amenityId);
+//                if (amenity == null)
+//                {
+//                    Console.WriteLine("Amenity not found.");
+//                    return;
+//                }
+
+//                // Check if relationship already exists
+//                bool exists = db.House_Amenities.Any(x => x.HouseId == houseId && x.AmenityId == amenityId);
+//                if (exists)
+//                {
+//                    Console.WriteLine("This house already has this amenity.");
+//                    return;
+//                }
+
+//                // Create and add relation
+//                newHouse_Amenity.HouseId = houseId;
+//                newHouse_Amenity.AmenityId = amenityId;
 
 //                house_AmenitiesController.Add(newHouse_Amenity);
-//                Console.WriteLine("House amenity added to database.");
+//                Console.WriteLine($"Amenity '{amenity.Name}' successfully linked to House '{house.Address}'!");
 //            }
 //            catch (Exception ex)
 //            {
-//                Console.WriteLine(ex.Message);
+//                Console.WriteLine("Error: " + ex.Message);
 //            }
 //        }
+
 
 //        public void Delete()
 //        {
@@ -176,10 +237,21 @@
 //                while (Validators.IsIntNoValid(findHouse_Amenity.AmenityId));
 
 //                House_Amenity house_Amenity = house_AmenitiesController.Get(findHouse_Amenity);
-//                Console.WriteLine(new string('-', 40));
-//                Console.WriteLine("House ID: " + house_Amenity.HouseId);
-//                Console.WriteLine("Amenity ID: " + house_Amenity.AmenityId);
-//                Console.WriteLine(new string('-', 40));
+//                if (house_Amenity != null)
+//                {
+//                    var house = house_Amenity.House;
+//                    var city = house.City;
+//                    var amenity = house_Amenity.Amenity;
+
+//                    Console.WriteLine(new string('-', 40));
+//                    Console.WriteLine($"Amenity: {amenity.Name}");
+//                    Console.WriteLine($"House Address: {house.Address}");
+//                    Console.WriteLine(new string('-', 40));
+//                }
+//                else
+//                {
+//                    Console.WriteLine("House Amenity not found.");
+//                }
 //            }
 //            catch (Exception ex)
 //            {
@@ -197,10 +269,21 @@
 //                var house_Amenities = house_AmenitiesController.ListAll();
 //                foreach (var house_Amenity in house_Amenities)
 //                {
-//                    Console.WriteLine(new string('-', 40));
-//                    Console.WriteLine("House ID: " + house_Amenity.HouseId);
-//                    Console.WriteLine("Amenity ID: " + house_Amenity.AmenityId);
-//                    Console.WriteLine(new string('-', 40));
+//                    if (house_Amenity != null)
+//                    {
+//                        var house = house_Amenity.House;
+//                        var city = house.City;
+//                        var amenity = house_Amenity.Amenity;
+
+//                        Console.WriteLine(new string('-', 40));
+//                        Console.WriteLine($"Amenity: {amenity.Name}");
+//                        Console.WriteLine($"House Address: {house.Address}");
+//                        Console.WriteLine(new string('-', 40));
+//                    }
+//                    else
+//                    {
+//                        Console.WriteLine("House Amenity not found.");
+//                    }
 //                }
 //            }
 //            catch (Exception ex)

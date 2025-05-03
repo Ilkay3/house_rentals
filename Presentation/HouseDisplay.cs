@@ -160,7 +160,7 @@ namespace house_rentals.Presentation
                     findHouse.HouseId = int.Parse(Console.ReadLine());
                 }
                 while (Validators.IsIntNoValid(findHouse.HouseId));
-                
+
                 do
                 {
                     Console.WriteLine("Enter house name: ");
@@ -179,7 +179,7 @@ namespace house_rentals.Presentation
                 {
                     Console.WriteLine("Enter price: ");
                     findHouse.Price = double.Parse(Console.ReadLine());
-                }   
+                }
                 while (Validators.IsDoubleNoValid(findHouse.Price));
 
                 do
