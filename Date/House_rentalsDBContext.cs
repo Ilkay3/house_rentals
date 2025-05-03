@@ -26,7 +26,7 @@ namespace house_rentals.Date
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("Server=localhost;Database=HouseAmenities;User=root;Password=21012007;",
+                optionsBuilder.UseMySql("Server=localhost;Database=House_Rentals;User=root;Password=21012007;",
                     new MySqlServerVersion(new Version(8, 0, 41))); // Adjust based on your MySQL version
             }
         }

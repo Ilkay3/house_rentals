@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "house_rentals", "house_rentals.csproj", "{AC3CA930-9ACC-4096-BBA9-8FE01BD54F94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "House_Rentals", "House_Rentals.csproj", "{AC3CA930-9ACC-4096-BBA9-8FE01BD54F94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHouse_Rentals", "..\TestHouse_Rentals\TestHouse_Rentals.csproj", "{F5CF485E-444A-41FF-9B5E-D6BC6CEDC70B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestHouse_Rentals", "..\TestHouse_Rentals\TestHouse_Rentals.csproj", "{F5CF485E-444A-41FF-9B5E-D6BC6CEDC70B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

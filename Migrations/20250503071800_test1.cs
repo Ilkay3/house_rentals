@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace house_rentals.Migrations
+namespace House_Rentals.Migrations
 {
     /// <inheritdoc />
     public partial class test1 : Migration
@@ -153,7 +153,7 @@ namespace house_rentals.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "House_Amanities",
+                name: "House_Amenities",
                 columns: table => new
                 {
                     HouseId = table.Column<int>(type: "int", nullable: false),
@@ -161,15 +161,15 @@ namespace house_rentals.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_House_Amanities", x => new { x.HouseId, x.AmenityId });
+                    table.PrimaryKey("PK_House_Amenities", x => new { x.HouseId, x.AmenityId });
                     table.ForeignKey(
-                        name: "FK_House_Amanities_Amenities_AmenityId",
+                        name: "FK_House_Amenities_Amenities_AmenityId",
                         column: x => x.AmenityId,
                         principalTable: "Amenities",
                         principalColumn: "AmenityId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_House_Amanities_Houses_HouseId",
+                        name: "FK_House_Amenities_Houses_HouseId",
                         column: x => x.HouseId,
                         principalTable: "Houses",
                         principalColumn: "HouseId",
@@ -185,7 +185,7 @@ namespace house_rentals.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     BookingId = table.Column<int>(type: "int", nullable: false),
                     PaymentDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Payment_method = table.Column<string>(type: "VarChar(50)", nullable: false)
+                    PaymentMethod = table.Column<string>(type: "VarChar(50)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -200,37 +200,6 @@ namespace house_rentals.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateTable(
-                name: "AmenityHouse_amenitie",
-                columns: table => new
-                {
-                    AmenitiesAmenityId = table.Column<int>(type: "int", nullable: false),
-                    HouseAmenitiesHouseId = table.Column<int>(type: "int", nullable: false),
-                    HouseAmenitiesAmenityId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AmenityHouse_amenitie", x => new { x.AmenitiesAmenityId, x.HouseAmenitiesHouseId, x.HouseAmenitiesAmenityId });
-                    table.ForeignKey(
-                        name: "FK_AmenityHouse_amenitie_Amenities_AmenitiesAmenityId",
-                        column: x => x.AmenitiesAmenityId,
-                        principalTable: "Amenities",
-                        principalColumn: "AmenityId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AmenityHouse_amenitie_House_Amanities_HouseAmenitiesHouseId_~",
-                        columns: x => new { x.HouseAmenitiesHouseId, x.HouseAmenitiesAmenityId },
-                        principalTable: "House_Amanities",
-                        principalColumns: new[] { "HouseId", "AmenityId" },
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AmenityHouse_amenitie_HouseAmenitiesHouseId_HouseAmenitiesAm~",
-                table: "AmenityHouse_amenitie",
-                columns: new[] { "HouseAmenitiesHouseId", "HouseAmenitiesAmenityId" });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_HouseId",
                 table: "Bookings",
@@ -242,8 +211,8 @@ namespace house_rentals.Migrations
                 column: "TenantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_House_Amanities_AmenityId",
-                table: "House_Amanities",
+                name: "IX_House_Amenities_AmenityId",
+                table: "House_Amenities",
                 column: "AmenityId");
 
             migrationBuilder.CreateIndex(
@@ -266,19 +235,16 @@ namespace house_rentals.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AmenityHouse_amenitie");
+                name: "House_Amenities");
 
             migrationBuilder.DropTable(
                 name: "Payments");
 
             migrationBuilder.DropTable(
-                name: "House_Amanities");
+                name: "Amenities");
 
             migrationBuilder.DropTable(
                 name: "Bookings");
-
-            migrationBuilder.DropTable(
-                name: "Amenities");
 
             migrationBuilder.DropTable(
                 name: "Houses");

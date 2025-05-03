@@ -9,11 +9,11 @@ using house_rentals.Date;
 
 #nullable disable
 
-namespace house_rentals.Migrations
+namespace House_Rentals.Migrations
 {
     [DbContext(typeof(HouseRentalsDBContext))]
-    [Migration("20250502203628_test9")]
-    partial class test9
+    [Migration("20250503071856_test3")]
+    partial class test3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -188,14 +188,9 @@ namespace house_rentals.Migrations
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 
-                    b.Property<int?>("TenantId")
-                        .HasColumnType("int");
-
                     b.HasKey("PaymentId");
 
                     b.HasIndex("BookingId");
-
-                    b.HasIndex("TenantId");
 
                     b.ToTable("Payments");
                 });
@@ -207,9 +202,6 @@ namespace house_rentals.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("TenantId"));
-
-                    b.Property<int?>("BookingId")
-                        .HasColumnType("int");
 
                     b.Property<string>("EGN")
                         .IsRequired()
@@ -232,8 +224,6 @@ namespace house_rentals.Migrations
                         .HasColumnType("VarChar(50)");
 
                     b.HasKey("TenantId");
-
-                    b.HasIndex("BookingId");
 
                     b.ToTable("Tenants");
                 });
@@ -285,7 +275,7 @@ namespace house_rentals.Migrations
                         .IsRequired();
 
                     b.HasOne("house_rentals.Date.Models.House", "House")
-                        .WithMany("House_Amenities")
+                        .WithMany()
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -303,18 +293,7 @@ namespace house_rentals.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("house_rentals.Date.Models.Tenant", null)
-                        .WithMany("Payments")
-                        .HasForeignKey("TenantId");
-
                     b.Navigation("Booking");
-                });
-
-            modelBuilder.Entity("house_rentals.Date.Models.Tenant", b =>
-                {
-                    b.HasOne("house_rentals.Date.Models.Booking", null)
-                        .WithMany("Tenants")
-                        .HasForeignKey("BookingId");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.Amenity", b =>
@@ -325,8 +304,6 @@ namespace house_rentals.Migrations
             modelBuilder.Entity("house_rentals.Date.Models.Booking", b =>
                 {
                     b.Navigation("Payments");
-
-                    b.Navigation("Tenants");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.City", b =>
@@ -337,18 +314,11 @@ namespace house_rentals.Migrations
             modelBuilder.Entity("house_rentals.Date.Models.House", b =>
                 {
                     b.Navigation("Bookings");
-
-                    b.Navigation("House_Amenities");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.Owner", b =>
                 {
                     b.Navigation("Houses");
-                });
-
-            modelBuilder.Entity("house_rentals.Date.Models.Tenant", b =>
-                {
-                    b.Navigation("Payments");
                 });
 #pragma warning restore 612, 618
         }

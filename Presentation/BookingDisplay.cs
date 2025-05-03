@@ -1,5 +1,6 @@
 ﻿using house_rentals.Controllers;
 using house_rentals.Date.Models;
+using House_Rentals.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -149,52 +150,6 @@ namespace house_rentals.Presentation
                     findBooking.BookingId = int.Parse(Console.ReadLine());
                 }
                 while (Validators.IsIntNoValid(findBooking.BookingId));
-
-                //do
-                //{
-                //    Console.WriteLine("Enter house Id: ");
-                //    findBooking.HouseId = int.Parse(Console.ReadLine());
-                //}
-                //while (Validators.IsIntNoValid(findBooking.HouseId));
-
-                //do
-                //{
-                //    Console.WriteLine("Enter tenant Id: ");
-                //    findBooking.TenantId = int.Parse(Console.ReadLine());
-                //}
-                //while (Validators.IsIntNoValid(findBooking.TenantId));
-
-                //do
-                //{
-                //    Console.WriteLine("Enter StartDate (format: dd-mm-yyyy): ");
-                //    string input = Console.ReadLine();
-
-                //    if (DateTime.TryParse(input, out DateTime startDate))
-                //    {
-                //        findBooking.StartDate = startDate;
-                //    }
-                //    else
-                //    {
-                //        Console.WriteLine("Invalid date format. Please try again.");
-                //    }
-                //}
-                //while (Validators.IsDateNoValid(findBooking.StartDate));
-
-                //do
-                //{
-                //    Console.WriteLine("Enter EndDate (format: dd-mm-yyyy): ");
-                //    string input = Console.ReadLine();
-
-                //    if (DateTime.TryParse(input, out DateTime endDate))
-                //    {
-                //        findBooking.EndDate = endDate;
-                //    }
-                //    else
-                //    {
-                //        Console.WriteLine("Invalid date format. Please try again.");
-                //    }
-                //}
-                //while (Validators.IsDateNoValid(findBooking.EndDate));
 
                 bookingController.Delete(findBooking);
                 Console.WriteLine("Done.");

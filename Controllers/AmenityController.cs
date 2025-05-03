@@ -1,5 +1,6 @@
 ﻿using house_rentals.Bussines;
 using house_rentals.Date.Models;
+using House_Rentals.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace house_rentals.Controllers
 {
-        public class AmenityController : IController<Amenity>
+    public class AmenityController : IController<Amenity>
         {
             private ICRUD<Amenity> amenityBusiness = new AmenityBusiness();
 

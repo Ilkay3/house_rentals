@@ -1,5 +1,6 @@
 ﻿using house_rentals.Controllers;
 using house_rentals.Date.Models;
+using House_Rentals.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace house_rentals.Presentation
 {
-   public class AmenityDisplay : IDisplay
+    public class AmenityDisplay : IDisplay
     {
         private int closeOperationId = 6;
         private IController<Amenity> amenityController = new AmenityController();

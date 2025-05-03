@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace house_rentals.Migrations
+namespace House_Rentals.Migrations
 {
     /// <inheritdoc />
-    public partial class test6 : Migration
+    public partial class test3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -8,7 +8,7 @@ using house_rentals.Date;
 
 #nullable disable
 
-namespace house_rentals.Migrations
+namespace House_Rentals.Migrations
 {
     [DbContext(typeof(HouseRentalsDBContext))]
     partial class HouseRentalsDBContextModelSnapshot : ModelSnapshot

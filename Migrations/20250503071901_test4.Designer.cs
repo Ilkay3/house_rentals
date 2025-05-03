@@ -9,11 +9,11 @@ using house_rentals.Date;
 
 #nullable disable
 
-namespace house_rentals.Migrations
+namespace House_Rentals.Migrations
 {
     [DbContext(typeof(HouseRentalsDBContext))]
-    [Migration("20250412072902_test1")]
-    partial class test1
+    [Migration("20250503071901_test4")]
+    partial class test4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,24 +24,6 @@ namespace house_rentals.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
-
-            modelBuilder.Entity("AmenityHouse_amenitie", b =>
-                {
-                    b.Property<int>("AmenitiesAmenityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HouseAmenitiesHouseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HouseAmenitiesAmenityId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AmenitiesAmenityId", "HouseAmenitiesHouseId", "HouseAmenitiesAmenityId");
-
-                    b.HasIndex("HouseAmenitiesHouseId", "HouseAmenitiesAmenityId");
-
-                    b.ToTable("AmenityHouse_amenitie");
-                });
 
             modelBuilder.Entity("house_rentals.Date.Models.Amenity", b =>
                 {
@@ -140,7 +122,7 @@ namespace house_rentals.Migrations
                     b.ToTable("Houses");
                 });
 
-            modelBuilder.Entity("house_rentals.Date.Models.House_amenitie", b =>
+            modelBuilder.Entity("house_rentals.Date.Models.House_Amenity", b =>
                 {
                     b.Property<int>("HouseId")
                         .HasColumnType("int");
@@ -152,7 +134,7 @@ namespace house_rentals.Migrations
 
                     b.HasIndex("AmenityId");
 
-                    b.ToTable("House_Amanities");
+                    b.ToTable("House_Amenities");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.Owner", b =>
@@ -202,7 +184,7 @@ namespace house_rentals.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Payment_method")
+                    b.Property<string>("PaymentMethod")
                         .IsRequired()
                         .HasColumnType("VarChar(50)");
 
@@ -246,21 +228,6 @@ namespace house_rentals.Migrations
                     b.ToTable("Tenants");
                 });
 
-            modelBuilder.Entity("AmenityHouse_amenitie", b =>
-                {
-                    b.HasOne("house_rentals.Date.Models.Amenity", null)
-                        .WithMany()
-                        .HasForeignKey("AmenitiesAmenityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("house_rentals.Date.Models.House_amenitie", null)
-                        .WithMany()
-                        .HasForeignKey("HouseAmenitiesHouseId", "HouseAmenitiesAmenityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("house_rentals.Date.Models.Booking", b =>
                 {
                     b.HasOne("house_rentals.Date.Models.House", "House")
@@ -289,7 +256,7 @@ namespace house_rentals.Migrations
                         .IsRequired();
 
                     b.HasOne("house_rentals.Date.Models.Owner", "Owner")
-                        .WithMany()
+                        .WithMany("Houses")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -299,10 +266,10 @@ namespace house_rentals.Migrations
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("house_rentals.Date.Models.House_amenitie", b =>
+            modelBuilder.Entity("house_rentals.Date.Models.House_Amenity", b =>
                 {
                     b.HasOne("house_rentals.Date.Models.Amenity", "Amenity")
-                        .WithMany()
+                        .WithMany("House_Amenities")
                         .HasForeignKey("AmenityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -321,12 +288,22 @@ namespace house_rentals.Migrations
             modelBuilder.Entity("house_rentals.Date.Models.Payment", b =>
                 {
                     b.HasOne("house_rentals.Date.Models.Booking", "Booking")
-                        .WithMany()
+                        .WithMany("Payments")
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Booking");
+                });
+
+            modelBuilder.Entity("house_rentals.Date.Models.Amenity", b =>
+                {
+                    b.Navigation("House_Amenities");
+                });
+
+            modelBuilder.Entity("house_rentals.Date.Models.Booking", b =>
+                {
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("house_rentals.Date.Models.City", b =>
@@ -337,6 +314,11 @@ namespace house_rentals.Migrations
             modelBuilder.Entity("house_rentals.Date.Models.House", b =>
                 {
                     b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("house_rentals.Date.Models.Owner", b =>
+                {
+                    b.Navigation("Houses");
                 });
 #pragma warning restore 612, 618
         }

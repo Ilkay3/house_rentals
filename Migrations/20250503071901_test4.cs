@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace house_rentals.Migrations
+namespace House_Rentals.Migrations
 {
     /// <inheritdoc />
     public partial class test4 : Migration
