@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace house_rentals.Bussines
 {
-    internal class PaymentBusiness : ICRUD<Payment>
+    public class PaymentBusiness : ICRUD<Payment>
     {
         private HouseRentalsDBContext houseRentalsDBContext = new HouseRentalsDBContext();
 
